@@ -1,0 +1,23 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const connectDB = require('./config/database');
+const itemRoutes = require('./routes/itemRoutes');
+
+const app = express();
+
+// Conectar ao banco de dados remoto
+connectDB();
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// Rotas
+app.use('/api', itemRoutes);
+
+// Inicializar o servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
