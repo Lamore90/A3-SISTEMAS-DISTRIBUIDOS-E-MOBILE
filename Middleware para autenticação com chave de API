@@ -1,0 +1,9 @@
+const apiKey = 'sua-chave-api-unica';
+
+module.exports = (req, res, next) => {
+    const key = req.headers['x-api-key'];
+    if (!key || key !== apiKey) {
+        return res.status(403).json({ error: 'Acesso negado: API Key inválida ou ausente.' });
+    }
+    next();
+};
